@@ -1,0 +1,32 @@
+name: Professor Email Sender
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs every 15 minutes. The Python sender checks each professor's
+    # local timezone and only sends when it is exactly the configured
+    # local delivery window.
+    - cron: "*/15 * * * *"
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run safe sender
+        env:
+          DRY_RUN: "true"
+        run: python src/send_emails.py

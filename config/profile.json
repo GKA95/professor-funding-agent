@@ -1,0 +1,29 @@
+{
+  "name": "Gideon Kwesi Ansah",
+  "degree_goal": "Fully funded Master's or PhD",
+  "primary_fields": [
+    "Electrical Engineering",
+    "Power Systems",
+    "Renewable Energy",
+    "Energy Systems",
+    "Microgrids",
+    "Battery Energy Storage",
+    "Solar PV",
+    "Power Electronics"
+  ],
+  "secondary_fields": [
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Energy Forecasting",
+    "Optimization",
+    "Data Science"
+  ],
+  "preferred_regions": [
+    "United States",
+    "Canada",
+    "Europe"
+  ],
+  "minimum_score": 75,
+  "daily_email_limit": 5,
+  "target_local_send_time": "09:00"
+}

@@ -1,0 +1,30 @@
+name: Daily Professor Research
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Research runs independently of professor email-send times.
+    # 00:00 UTC daily = 00:00 Ghana time.
+    - cron: "0 0 * * *"
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run research pipeline
+        run: |
+          python -c "from src.researcher import discover_candidates; print('Research pipeline ready. Candidates:', len(discover_candidates()))"
