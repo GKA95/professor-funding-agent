@@ -22,7 +22,7 @@ src/
   models.py
   researcher.py
   scorer.py
-  queue.py
+  email_queue.py
   email_generator.py
   send_emails.py
 requirements.txt
