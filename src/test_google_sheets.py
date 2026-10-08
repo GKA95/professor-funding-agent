@@ -1,23 +1,24 @@
-import sys
 import os
+import sys
 
-print("Python:", sys.version)
-print("Current directory:", os.getcwd())
-print("sys.path:")
-for path in sys.path:
-    print("  ", path)
+# Remove the src directory from the import path temporarily.
+src_dir = os.path.dirname(os.path.abspath(__file__))
+if src_dir in sys.path:
+    sys.path.remove(src_dir)
 
+# Test Python's standard queue module.
 import queue
 
-print("QUEUE MODULE:")
-print("  file:", getattr(queue, "__file__", "UNKNOWN"))
-print("  has LifoQueue:", hasattr(queue, "LifoQueue"))
+print("Python queue module:", queue.__file__)
+print("Has LifoQueue:", hasattr(queue, "LifoQueue"))
 
 if not hasattr(queue, "LifoQueue"):
     raise RuntimeError(
-        "WRONG QUEUE MODULE LOADED. "
-        f"Python loaded queue from: {getattr(queue, '__file__', 'UNKNOWN')}"
+        f"Python is loading the wrong queue module: {queue.__file__}"
     )
+
+# Now load our Google Sheets connector.
+sys.path.insert(0, src_dir)
 
 from google_sheets import get_spreadsheet
 
